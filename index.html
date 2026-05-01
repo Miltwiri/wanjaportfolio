@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scholastica Wanja | Executive Virtual Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Variables ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --blush: #fce8f0;
+      --pink-light: #fdd5e6;
+      --pink: #f4a7c3;
+      --pink-deep: #e8829e;
+      --rose: #c75b7a;
+      --ink: #1e1b1f;
+      --muted: #7a6b72;
+      --border: #f0d8e4;
+      --section-bg: #fdf5f8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── Utility ── */
+    .section-tag {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      background: var(--blush);
+      padding: .25rem .85rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+    }
+    .display-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+    .section-intro {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 560px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--rose);
+      color: #fff;
+      padding: .75rem 1.75rem;
+      border-radius: 50px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: .88rem;
+      text-decoration: none;
+      letter-spacing: .04em;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      box-shadow: 0 4px 18px rgba(199,91,122,.22);
+    }
+    .btn-primary:hover { transform: translateY(-2px); background: var(--pink-deep); box-shadow: 0 8px 28px rgba(199,91,122,.32); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      border: 2px solid var(--rose);
+      color: var(--rose);
+      padding: .72rem 1.65rem;
+      border-radius: 50px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: .88rem;
+      text-decoration: none;
+      letter-spacing: .04em;
+      transition: all .25s ease;
+    }
+    .btn-outline:hover { background: var(--rose); color: #fff; transform: translateY(-2px); }
+
+    /* ── Scroll animation ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up:nth-child(2) { transition-delay: .1s; }
+    .fade-up:nth-child(3) { transition-delay: .2s; }
+    .fade-up:nth-child(4) { transition-delay: .3s; }
+
+    /* ═══════════════════════════
+       HEADER
+    ═══════════════════════════ */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 5%;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      animation: slideDown .7s cubic-bezier(.23,1,.32,1) both;
+    }
+    @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: .03em;
+      animation: fadeInLeft .7s .15s both;
+    }
+    .logo span { color: var(--rose); }
+
+    nav { display: flex; align-items: center; gap: .25rem; }
+    nav a {
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: var(--muted);
+      text-decoration: none;
+      padding: .4rem .75rem;
+      border-radius: 50px;
+      position: relative;
+      transition: color .2s ease, background .2s ease;
+      animation: fadeInDown .6s both;
+    }
+    nav a:nth-child(1) { animation-delay: .2s; }
+    nav a:nth-child(2) { animation-delay: .28s; }
+    nav a:nth-child(3) { animation-delay: .36s; }
+    nav a:nth-child(4) { animation-delay: .44s; }
+    nav a:nth-child(5) { animation-delay: .52s; }
+    nav a:nth-child(6) { animation-delay: .60s; }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%; right: 50%;
+      height: 2px;
+      background: var(--rose);
+      border-radius: 2px;
+      transition: left .25s ease, right .25s ease;
+    }
+    nav a:hover { color: var(--rose); }
+    nav a:hover::after { left: 18%; right: 18%; }
+
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: translateX(0); } }
+
+    .nav-cta {
+      margin-left: .5rem;
+      padding: .42rem 1.1rem !important;
+      background: var(--blush) !important;
+      color: var(--rose) !important;
+      border-radius: 50px !important;
+      font-weight: 700 !important;
+      animation-delay: .68s !important;
+    }
+    .nav-cta:hover { background: var(--rose) !important; color: #fff !important; }
+    .nav-cta::after { display: none; }
+
+    /* Mobile hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: .4rem;
+    }
+    .hamburger span { width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all .3s ease; display: block; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 70px; left: 0; right: 0;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      padding: 1rem 5%;
+      gap: .25rem;
+      z-index: 999;
+      box-shadow: 0 8px 30px rgba(0,0,0,.06);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { padding: .65rem .5rem; color: var(--ink); text-decoration: none; font-weight: 600; font-size: .9rem; border-bottom: 1px solid var(--border); }
+    .mobile-nav a:last-child { border-bottom: none; color: var(--rose); }
+
+    /* ═══════════════════════════
+       HERO
+    ═══════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      padding: 100px 5% 60px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-blob {
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, var(--pink-light) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+      animation: blobPulse 6s ease-in-out infinite alternate;
+    }
+    .hero-bg-blob-2 {
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, #fce4ef 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+      animation: blobPulse 8s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes blobPulse { from { transform: scale(1) rotate(0deg); } to { transform: scale(1.1) rotate(8deg); } }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-left { animation: heroLeft .9s cubic-bezier(.23,1,.32,1) .15s both; }
+    @keyframes heroLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+
+    .hero-greeting {
+      font-size: .82rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--rose);
+      font-weight: 700;
+      margin-bottom: .75rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .hero-greeting::before {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 2px;
+      background: var(--rose);
+      border-radius: 2px;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--ink);
+      margin-bottom: .5rem;
+    }
+    .hero-name .highlight {
+      color: var(--rose);
+      font-style: italic;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      font-weight: 400;
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+      letter-spacing: .02em;
+    }
+
+    .hero-desc {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 2rem;
+      max-width: 480px;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .stat-item { display: flex; flex-direction: column; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--rose);
+      line-height: 1;
+    }
+    .stat-label { font-size: .75rem; color: var(--muted); font-weight: 600; letter-spacing: .04em; margin-top: .2rem; }
+
+    .hero-right {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      animation: heroRight .9s cubic-bezier(.23,1,.32,1) .3s both;
+    }
+    @keyframes heroRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+
+    .hero-image-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+    }
+    .hero-blob-bg {
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 88%;
+      height: 88%;
+      background: var(--blush);
+      border-radius: 60% 40% 55% 45% / 55% 45% 60% 40%;
+      z-index: 0;
+      animation: morphBlob 7s ease-in-out infinite;
+    }
+    @keyframes morphBlob {
+      0%, 100% { border-radius: 60% 40% 55% 45% / 55% 45% 60% 40%; }
+      33% { border-radius: 45% 55% 40% 60% / 60% 40% 55% 45%; }
+      66% { border-radius: 50% 50% 45% 55% / 45% 55% 50% 50%; }
+    }
+    .hero-img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 12px 36px rgba(199,91,122,.15));
+    }
+    .hero-badge {
+      position: absolute;
+      bottom: 14%;
+      left: -5%;
+      background: #fff;
+      border-radius: 16px;
+      padding: .65rem 1rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,.1);
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      z-index: 2;
+      animation: float 3s ease-in-out infinite;
+    }
+    .hero-badge-2 {
+      position: absolute;
+      top: 18%;
+      right: -5%;
+      background: #fff;
+      border-radius: 16px;
+      padding: .6rem .9rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,.1);
+      z-index: 2;
+      animation: float 4s ease-in-out infinite reverse;
+    }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    .badge-icon { width: 36px; height: 36px; background: var(--blush); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .badge-text { display: flex; flex-direction: column; }
+    .badge-text strong { font-size: .78rem; font-weight: 700; color: var(--ink); }
+    .badge-text span { font-size: .68rem; color: var(--muted); }
+
+    /* ═══════════════════════════
+       ABOUT
+    ═══════════════════════════ */
+    #about {
+      padding: 100px 5%;
+      background: var(--section-bg);
+      position: relative;
+      overflow: hidden;
+    }
+    #about::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, var(--pink-light) 0%, transparent 70%);
+      border-radius: 50%;
+      opacity: .6;
+      pointer-events: none;
+    }
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img {
+      width: 100%;
+      border-radius: 24px;
+      display: block;
+      box-shadow: 0 16px 48px rgba(199,91,122,.15);
+    }
+    .about-deco {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 60%;
+      height: 60%;
+      border: 3px solid var(--pink);
+      border-radius: 24px;
+      z-index: -1;
+    }
+    .about-pill {
+      position: absolute;
+      top: -18px;
+      left: -18px;
+      background: var(--rose);
+      color: #fff;
+      border-radius: 50px;
+      padding: .5rem 1.1rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      box-shadow: 0 6px 20px rgba(199,91,122,.3);
+    }
+    .about-text h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); margin-bottom: 1rem; }
+    .about-text p { font-size: .95rem; color: var(--muted); line-height: 1.85; margin-bottom: 1rem; }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .why-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.2rem;
+      border: 1.5px solid var(--border);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .why-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(199,91,122,.1); border-color: var(--pink); }
+    .why-icon { font-size: 1.5rem; margin-bottom: .5rem; }
+    .why-card h4 { font-size: .88rem; font-weight: 700; color: var(--ink); margin-bottom: .35rem; }
+    .why-card p { font-size: .8rem; color: var(--muted); line-height: 1.6; margin: 0; }
+
+    /* ═══════════════════════════
+       SERVICES
+    ═══════════════════════════ */
+    #services {
+      padding: 100px 5%;
+      background: var(--white);
+    }
+    .services-inner { max-width: 1100px; margin: 0 auto; }
+    .services-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .services-header h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); }
+    .services-header p { font-size: .95rem; color: var(--muted); margin: .75rem auto 0; max-width: 520px; line-height: 1.8; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--section-bg);
+      border-radius: 20px;
+      padding: 2rem 1.75rem;
+      border: 1.5px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--pink), var(--rose));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .35s ease;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(199,91,122,.12); border-color: var(--pink); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 52px; height: 52px;
+      background: var(--blush);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+    }
+    .service-card h3 { font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: .6rem; }
+    .service-card p { font-size: .85rem; color: var(--muted); line-height: 1.75; }
+
+    /* ═══════════════════════════
+       TOOLS
+    ═══════════════════════════ */
+    #tools {
+      padding: 100px 5%;
+      background: var(--section-bg);
+    }
+    .tools-inner { max-width: 1100px; margin: 0 auto; }
+    .tools-header { text-align: center; margin-bottom: 3rem; }
+    .tools-header h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); }
+    .tools-header p { font-size: .95rem; color: var(--muted); margin: .75rem auto 0; max-width: 520px; line-height: 1.8; }
+
+    .tools-categories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) { .tools-categories { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 580px) { .tools-categories { grid-template-columns: 1fr; } }
+    .tools-category {
+      background: #fff;
+      border-radius: 20px;
+      padding: 1.6rem 1.4rem;
+      border: 1.5px solid var(--border);
+      transition: box-shadow .3s ease, border-color .3s ease;
+    }
+    .tools-category:hover { box-shadow: 0 10px 32px rgba(199,91,122,.1); border-color: var(--pink); }
+    .tools-cat-title {
+      font-size: .68rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 1.1rem;
+      padding-bottom: .55rem;
+      border-bottom: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+    }
+    .tools-cat-title span { font-size: .95rem; }
+    .tool-item {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .6rem .4rem;
+      border-radius: 10px;
+      transition: background .2s ease;
+      margin-bottom: .1rem;
+    }
+    .tool-item:hover { background: var(--section-bg); }
+    .tool-logo {
+      width: 32px; height: 32px;
+      object-fit: contain;
+      border-radius: 7px;
+      flex-shrink: 0;
+    }
+    .tool-info { display: flex; flex-direction: column; }
+    .tool-name { font-size: .84rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
+    .tool-desc { font-size: .71rem; color: var(--muted); line-height: 1.4; margin-top: .1rem; }
+
+    /* ═══════════════════════════
+       PORTFOLIO
+    ═══════════════════════════ */
+    #portfolio {
+      padding: 100px 5%;
+      background: var(--white);
+    }
+    .portfolio-inner { max-width: 1100px; margin: 0 auto; }
+    .portfolio-header { text-align: center; margin-bottom: 3.5rem; }
+    .portfolio-header h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); }
+    .portfolio-header p { font-size: .95rem; color: var(--muted); margin: .75rem auto 0; max-width: 520px; line-height: 1.8; }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    .portfolio-card {
+      background: var(--section-bg);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .portfolio-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(199,91,122,.14); }
+    .portfolio-img-wrap {
+      overflow: hidden;
+      height: 220px;
+      position: relative;
+    }
+    .portfolio-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+      display: block;
+    }
+    .portfolio-card:hover .portfolio-img-wrap img { transform: scale(1.04); }
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(199,91,122,.5));
+      opacity: 0;
+      transition: opacity .35s ease;
+    }
+    .portfolio-card:hover .portfolio-overlay { opacity: 1; }
+    .portfolio-body { padding: 1.5rem; }
+    .portfolio-cat {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: .4rem;
+    }
+    .portfolio-body h3 { font-size: 1.05rem; font-weight: 700; color: var(--ink); margin-bottom: .5rem; }
+    .portfolio-body p { font-size: .83rem; color: var(--muted); line-height: 1.7; }
+
+    /* ═══════════════════════════
+       TESTIMONIAL
+    ═══════════════════════════ */
+    #testimonial {
+      padding: 100px 5%;
+      background: var(--section-bg);
+      position: relative;
+      overflow: hidden;
+    }
+    #testimonial::before {
+      content: '"';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20rem;
+      color: var(--pink-light);
+      position: absolute;
+      top: -60px; left: 2%;
+      line-height: 1;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .testimonial-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .testimonial-author {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .3rem;
+    }
+    .testimonial-author strong { font-size: .9rem; font-weight: 700; color: var(--ink); }
+    .testimonial-author span { font-size: .8rem; color: var(--muted); }
+    .testimonial-stars { color: var(--rose); font-size: 1rem; letter-spacing: .1em; margin-bottom: .5rem; }
+
+    /* ═══════════════════════════
+       CONTACT
+    ═══════════════════════════ */
+    #contact {
+      padding: 100px 5%;
+      background: var(--white);
+    }
+    .contact-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-left h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); margin-bottom: 1rem; }
+    .contact-left p { font-size: .95rem; color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      margin-bottom: 1.1rem;
+      padding: .9rem 1.1rem;
+      background: var(--section-bg);
+      border-radius: 14px;
+      border: 1.5px solid var(--border);
+      text-decoration: none;
+      transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+    }
+    .contact-detail:hover { transform: translateX(4px); border-color: var(--pink); box-shadow: 0 6px 20px rgba(199,91,122,.1); }
+    .contact-icon { width: 40px; height: 40px; background: var(--blush); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .contact-info strong { display: block; font-size: .78rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .contact-info span { font-size: .88rem; color: var(--ink); font-weight: 500; }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .35rem; }
+    .form-group label { font-size: .76rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: .75rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: .9rem;
+      color: var(--ink);
+      background: var(--section-bg);
+      outline: none;
+      transition: border-color .22s ease, box-shadow .22s ease;
+      resize: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(244,167,195,.2);
+    }
+    .form-group textarea { min-height: 110px; }
+    .form-submit { width: 100%; padding: .85rem; border: none; cursor: pointer; font-family: 'Nunito', sans-serif; }
+
+    /* ═══════════════════════════
+       FOOTER
+    ═══════════════════════════ */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,.7);
+      overflow: hidden;
+      position: relative;
+    }
+    .footer-banner { width: 100%; display: block; max-height: 280px; object-fit: cover; object-position: center top; opacity: .9; }
+    .footer-content {
+      padding: 2.5rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--pink); }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,.6); text-decoration: none; font-size: .82rem; transition: color .2s ease; }
+    .footer-links a:hover { color: var(--pink); }
+    .footer-copy { font-size: .78rem; }
+
+    /* ═══════════════════════════
+       ILLUSTRATIONS / DECORATIVE
+    ═══════════════════════════ */
+    .deco-dots {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background-image: radial-gradient(circle, var(--pink) 1.5px, transparent 1.5px);
+      background-size: 14px 14px;
+      opacity: .35;
+      pointer-events: none;
+    }
+
+    /* ═══════════════════════════
+       RESPONSIVE
+    ═══════════════════════════ */
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-inner,
+      .about-inner,
+      .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      .hero-right { order: -1; }
+      .hero-image-wrap { max-width: 340px; margin: 0 auto; }
+      .hero-badge, .hero-badge-2 { display: none; }
+
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      #hero, #about, #services, #tools, #portfolio, #testimonial, #contact { padding: 80px 5%; }
+      .services-grid { grid-template-columns: 1fr; }
+      .hero-btns { flex-direction: column; }
+      .footer-content { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ═══════════════════════════
+       SCROLL PROGRESS BAR
+    ═══════════════════════════ */
+    #progress-bar {
+      position: fixed;
+      top: 70px;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--pink), var(--rose));
+      z-index: 999;
+      width: 0%;
+      transition: width .1s linear;
+    }
+
+    /* ═══════════════════════════
+       ACTIVE NAV
+    ═══════════════════════════ */
+    nav a.active { color: var(--rose); }
+    nav a.active::after { left: 18%; right: 18%; }
+  </style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div id="progress-bar"></div>
+
+<!-- ── Header ── -->
+<header>
+  <a href="#hero" class="logo">Scholastica <span>Wanja</span></a>
+  <nav id="main-nav">
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#tools">Tools</a>
+    <a href="#portfolio">Work</a>
+    <a href="#contact" class="nav-cta">Let's Talk</a>
+  </nav>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#hero" onclick="closeMenu()">Home</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#tools" onclick="closeMenu()">Tools</a>
+  <a href="#portfolio" onclick="closeMenu()">Work</a>
+  <a href="#testimonial" onclick="closeMenu()">Testimonial</a>
+  <a href="#contact" onclick="closeMenu()">Let's Talk →</a>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero">
+  <div class="hero-bg-blob"></div>
+  <div class="hero-bg-blob-2"></div>
+  <div class="hero-inner">
+    <!-- Left -->
+    <div class="hero-left">
+      <p class="hero-greeting">Executive Virtual Assistant</p>
+      <h1 class="hero-name">Hello, I'm<br><span class="highlight">Scholastica Wanja</span></h1>
+      <p class="hero-title">Your Partner in Seamless Execution</p>
+      <p class="hero-desc">I bring order to chaos — streamlining your operations, managing your time, and handling the details so you can lead with confidence and focus on what truly moves the needle.</p>
+      <div class="hero-btns">
+        <a href="#portfolio" class="btn-primary">✦ View My Work</a>
+        <a href="#contact" class="btn-outline">Get In Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">3+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">10+</span>
+          <span class="stat-label">Tools Mastered</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Reliability</span>
+        </div>
+      </div>
+    </div>
+    <!-- Right -->
+    <div class="hero-right">
+      <div class="hero-image-wrap">
+        <div class="hero-blob-bg"></div>
+        <img src="wanjaHero.png" alt="Scholastica Wanja" class="hero-img" />
+        <div class="hero-badge">
+          <div class="badge-icon">📅</div>
+          <div class="badge-text">
+            <strong>Calendar Managed</strong>
+            <span>Zero conflicts this week</span>
+          </div>
+        </div>
+        <div class="hero-badge-2">
+          <span style="font-size:1.2rem">✉️</span>
+          <span style="font-size:.75rem; font-weight:700; color:var(--rose); margin-left:.4rem;">Inbox: Organized ✓</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section id="about">
+  <div class="deco-dots" style="bottom:5%; right:3%;"></div>
+  <div class="about-inner">
+    <div class="about-img-wrap fade-up">
+      <img src="wanjaHero.png" alt="Scholastica Wanja" class="about-img" />
+      <div class="about-deco"></div>
+      <div class="about-pill">Nairobi, Kenya 🇰🇪</div>
+    </div>
+    <div class="about-text">
+      <span class="section-tag fade-up">About Me</span>
+      <h2 class="display-title fade-up">My Experience Lets Me Anticipate Needs, Not Just Respond to Tasks</h2>
+      <p class="fade-up" style="font-size:.95rem; color:var(--muted); line-height:1.85; margin-bottom:1rem;">I'm a detail-oriented Executive Virtual Assistant with hands-on experience supporting CEOs, entrepreneurs, and busy professionals. From managing high-volume inboxes to coordinating travel and preparing structured meeting agendas, I keep operations running smoothly and on schedule.</p>
+      <p class="fade-up" style="font-size:.95rem; color:var(--muted); line-height:1.85; margin-bottom:1.5rem;">I don't just complete tasks — I take ownership of them. Proactive, reliable, and discreet, I work as a true extension of your team so you can focus on leadership and growth.</p>
+      <div class="why-grid">
+        <div class="why-card fade-up">
+          <div class="why-icon">⏱️</div>
+          <h4>Strategic Time Optimization</h4>
+          <p>Your inbox, calendar, and travel handled so you can lead with clarity.</p>
+        </div>
+        <div class="why-card fade-up">
+          <div class="why-icon">🗂️</div>
+          <h4>Structured Operations</h4>
+          <p>Seamless coordination and zero missed details across all workflows.</p>
+        </div>
+        <div class="why-card fade-up">
+          <div class="why-icon">✅</div>
+          <h4>Trusted Execution</h4>
+          <p>Tasks owned efficiently and discreetly at the highest professional standard.</p>
+        </div>
+        <div class="why-card fade-up">
+          <div class="why-icon">🎯</div>
+          <h4>Proactive Thinking</h4>
+          <p>Anticipating your needs before they become problems.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section id="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <span class="section-tag fade-up">What I Do</span>
+      <h2 class="display-title fade-up">Executive Operations <em style="font-style:italic; color:var(--rose);">Management</em></h2>
+      <p class="fade-up">Comprehensive virtual support designed to reduce your workload, protect your time, and keep every moving part of your business aligned.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon">📅</div>
+        <h3>Calendar & Schedule Management</h3>
+        <p>Eliminate conflicts and overlaps. Your time is structured strategically — priorities clearly allocated and every commitment aligned with your goals.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">📬</div>
+        <h3>Inbox & Email Prioritization</h3>
+        <p>Your communications stay organized and filtered. Urgent matters surface immediately, clutter disappears, and timely responses are maintained consistently.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">📋</div>
+        <h3>Meeting Coordination & Agendas</h3>
+        <p>No double bookings. All participants aligned, clear agendas prepared, and discussions kept focused, productive, and purposeful.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">✈️</div>
+        <h3>Travel & Logistics Planning</h3>
+        <p>Seamless itineraries from start to finish. Bookings managed efficiently, disruptions minimized, and smooth movement between every engagement.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">📁</div>
+        <h3>Document & Task Management</h3>
+        <p>Well-organized files, consistent progress tracking, and deadlines met — all information easily accessible and every task accounted for.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🔍</div>
+        <h3>Research & Data Organization</h3>
+        <p>Thorough research delivered with precision. Structured, clean data that informs better decisions and supports your key priorities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TOOLS ═══════════ -->
+<section id="tools">
+  <div class="tools-inner">
+    <div class="tools-header">
+      <span class="section-tag fade-up">My Toolkit</span>
+      <h2 class="display-title fade-up">Tools I <em style="font-style:italic; color:var(--rose);">Work With</em></h2>
+      <p class="fade-up">I quickly learn and adopt new platforms, integrating them into systems that enhance efficiency, optimize workflows, and drive business growth.</p>
+    </div>
+
+    <div class="tools-categories">
+
+      <!-- Workspace & Productivity -->
+      <div class="tools-category fade-up">
+        <p class="tools-cat-title"><span>🖥️</span> Workspace & Productivity</p>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://www.gstatic.com/images/branding/product/2x/gmail_2020q4_32dp.png" alt="Gmail" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Gmail</span>
+            <span class="tool-desc">Inbox management & email triage</span>
+          </div>
+        </div>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://www.gstatic.com/images/branding/product/2x/drive_2020q4_32dp.png" alt="Google Drive" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Google Drive</span>
+            <span class="tool-desc">File storage & document organization</span>
+          </div>
+        </div>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://www.gstatic.com/images/branding/product/2x/docs_2020q4_32dp.png" alt="Google Docs" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Google Docs</span>
+            <span class="tool-desc">Reports, agendas & documentation</span>
+          </div>
+        </div>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://www.gstatic.com/images/branding/product/2x/slides_2020q4_32dp.png" alt="Google Slides" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Google Slides</span>
+            <span class="tool-desc">Presentations & meeting materials</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data & Reporting -->
+      <div class="tools-category fade-up">
+        <p class="tools-cat-title"><span>📊</span> Data & Reporting</p>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://www.gstatic.com/images/branding/product/2x/sheets_2020q4_32dp.png" alt="Google Sheets" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Google Sheets</span>
+            <span class="tool-desc">Data tracking, logs & task lists</span>
+          </div>
+        </div>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://logo.clearbit.com/looker.com" alt="Looker Studio" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Looker Studio</span>
+            <span class="tool-desc">Reporting dashboards & data visuals</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scheduling -->
+      <div class="tools-category fade-up">
+        <p class="tools-cat-title"><span>📅</span> Scheduling</p>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://www.gstatic.com/images/branding/product/2x/calendar_2020q4_32dp.png" alt="Google Calendar" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Google Calendar</span>
+            <span class="tool-desc">Schedule structuring & conflict prevention</span>
+          </div>
+        </div>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://logo.clearbit.com/calendly.com" alt="Calendly" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Calendly</span>
+            <span class="tool-desc">Automated booking & availability management</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Communication Tools -->
+      <div class="tools-category fade-up">
+        <p class="tools-cat-title"><span>💬</span> Communication Tools</p>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://www.gstatic.com/images/branding/product/2x/meet_2020q4_32dp.png" alt="Google Meet" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Google Meet</span>
+            <span class="tool-desc">Virtual meetings & team coordination</span>
+          </div>
+        </div>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://logo.clearbit.com/zoom.us" alt="Zoom" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Zoom</span>
+            <span class="tool-desc">Client calls, webinars & remote sessions</span>
+          </div>
+        </div>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://logo.clearbit.com/microsoft.com" alt="Microsoft Teams" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Microsoft Teams</span>
+            <span class="tool-desc">Team collaboration & message management</span>
+          </div>
+        </div>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://logo.clearbit.com/webex.com" alt="Webex" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Webex</span>
+            <span class="tool-desc">Enterprise video conferencing</span>
+          </div>
+        </div>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://logo.clearbit.com/gotomeeting.com" alt="GoToMeeting" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">GoToMeeting</span>
+            <span class="tool-desc">Online meeting hosting & management</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI & Productivity -->
+      <div class="tools-category fade-up">
+        <p class="tools-cat-title"><span>🤖</span> AI & Productivity</p>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://logo.clearbit.com/openai.com" alt="ChatGPT" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">ChatGPT</span>
+            <span class="tool-desc">Drafting, research & content support</span>
+          </div>
+        </div>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg" alt="Gemini" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Gemini</span>
+            <span class="tool-desc">AI-assisted tasks within Google Workspace</span>
+          </div>
+        </div>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://logo.clearbit.com/anthropic.com" alt="Claude" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Claude</span>
+            <span class="tool-desc">Long-form writing, analysis & task planning</span>
+          </div>
+        </div>
+        <div class="tool-item">
+          <img class="tool-logo" src="https://logo.clearbit.com/perplexity.ai" alt="Perplexity" onerror="this.style.display='none'" />
+          <div class="tool-info">
+            <span class="tool-name">Perplexity</span>
+            <span class="tool-desc">Real-time research & fact-finding</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end tools-categories -->
+  </div>
+</section>
+
+<!-- ═══════════ PORTFOLIO ═══════════ -->
+<section id="portfolio">
+  <div class="portfolio-inner">
+    <div class="portfolio-header">
+      <span class="section-tag fade-up">My Work</span>
+      <h2 class="display-title fade-up">Real Projects, <em style="font-style:italic; color:var(--rose);">Real Results</em></h2>
+      <p class="fade-up">A selection of work samples showcasing how I deliver structured, professional support across core virtual assistant functions.</p>
+    </div>
+    <div class="portfolio-grid">
+      <!-- Email -->
+      <div class="portfolio-card fade-up">
+        <div class="portfolio-img-wrap">
+          <img src="wanjaEmailMarketing.png" alt="Inbox & Email Management" loading="lazy" />
+          <div class="portfolio-overlay"></div>
+        </div>
+        <div class="portfolio-body">
+          <p class="portfolio-cat">Inbox Management</p>
+          <h3>Email Organization & Prioritization</h3>
+          <p>Organized and prioritized a high-volume inbox for a professional balancing business and academic commitments — ensuring important messages were addressed promptly and efficiently.</p>
+        </div>
+      </div>
+      <!-- Calendar -->
+      <div class="portfolio-card fade-up">
+        <div class="portfolio-img-wrap">
+          <img src="wanjaCalendarManagement.png" alt="Calendar Management" loading="lazy" />
+          <div class="portfolio-overlay"></div>
+        </div>
+        <div class="portfolio-body">
+          <p class="portfolio-cat">Calendar Management</p>
+          <h3>Dynamic Schedule Structuring</h3>
+          <p>Structured a dynamic schedule integrating work meetings, academic sessions, and personal commitments — maintaining clear time allocation and preventing conflicts throughout the week.</p>
+        </div>
+      </div>
+      <!-- Travel -->
+      <div class="portfolio-card fade-up">
+        <div class="portfolio-img-wrap">
+          <img src="wanjaTravelCoordinator.png" alt="Travel Coordination Itinerary" loading="lazy" />
+          <div class="portfolio-overlay"></div>
+        </div>
+        <div class="portfolio-body">
+          <p class="portfolio-cat">Travel Coordination</p>
+          <h3>Zanzibar Staycation Itinerary Package</h3>
+          <p>Designed a detailed, end-to-end Zanzibar staycation itinerary — coordinating travel, accommodation, and activities for a seamless and memorable birthday experience.</p>
+        </div>
+      </div>
+      <!-- Meeting Agenda -->
+      <div class="portfolio-card fade-up">
+        <div class="portfolio-img-wrap">
+          <img src="wanjaMeetingAgenda.png" alt="Meeting Agenda" loading="lazy" />
+          <div class="portfolio-overlay"></div>
+        </div>
+        <div class="portfolio-body">
+          <p class="portfolio-cat">Meeting Coordination</p>
+          <h3>Fundraising Meeting Agenda</h3>
+          <p>Developed a clear, structured agenda for a company fundraising meeting — aligning objectives, key discussion points, and participant roles for a focused and results-driven session.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TESTIMONIAL ═══════════ -->
+<section id="testimonial">
+  <div class="testimonial-inner">
+    <span class="section-tag fade-up" style="margin: 0 auto 1.5rem; display:block; width:fit-content;">What My Supervisor Says</span>
+    <div class="testimonial-stars fade-up">★★★★★</div>
+    <p class="testimonial-text fade-up">"Working with her has been an absolute asset to our team. She consistently demonstrates strong organizational skills and professionalism — efficiently managing schedules, communications, and administrative tasks. Her ability to handle email and calendar coordination, conduct thorough research, and keep operations running smoothly has greatly improved our workflow. She is reliable, detail-oriented, and a valuable Virtual Assistant who brings structure and efficiency to every task."</p>
+    <div class="testimonial-author fade-up">
+      <strong>Pauline Kea</strong>
+      <span>Supervisor & Team Lead</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <span class="section-tag fade-up">Get In Touch</span>
+      <h2 class="display-title fade-up">Let's Make <em style="color:var(--rose); font-style:italic;">Things Happen</em></h2>
+      <p class="fade-up">Ready to reclaim your time and bring structure to your operations? Reach out — I'd love to learn about your goals and show you how I can help.</p>
+      <a href="tel:+254714307439" class="contact-detail fade-up">
+        <div class="contact-icon">📞</div>
+        <div class="contact-info">
+          <strong>Phone</strong>
+          <span>+254 714 307 439</span>
+        </div>
+      </a>
+      <a href="mailto:wanjaschola20@gmail.com" class="contact-detail fade-up">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-info">
+          <strong>Email</strong>
+          <span>wanjaschola20@gmail.com</span>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/scholastica-wanja-b6216b339" target="_blank" rel="noopener" class="contact-detail fade-up">
+        <div class="contact-icon">💼</div>
+        <div class="contact-info">
+          <strong>LinkedIn</strong>
+          <span>Scholastica Wanja</span>
+        </div>
+      </a>
+      <a href="#" class="contact-detail fade-up">
+        <div class="contact-icon">📍</div>
+        <div class="contact-info">
+          <strong>Location</strong>
+          <span>Nairobi, Kenya (Remote Available)</span>
+        </div>
+      </a>
+    </div>
+    <div class="contact-form-wrap fade-up">
+      <div style="background:var(--section-bg); border-radius:24px; padding:2rem; border:1.5px solid var(--border);">
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:700; margin-bottom:1.5rem; color:var(--ink);">Send a Message</h3>
+        <form class="contact-form" onsubmit="handleForm(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="Your first name" required />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Your last name" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label>Service Needed</label>
+            <select>
+              <option value="">Select a service…</option>
+              <option>Calendar & Schedule Management</option>
+              <option>Inbox & Email Management</option>
+              <option>Meeting Coordination</option>
+              <option>Travel & Logistics Planning</option>
+              <option>Document & Task Management</option>
+              <option>Research & Data Organization</option>
+              <option>General Inquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell me a bit about what you need…"></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit">Send Message ✦</button>
+        </form>
+        <div id="form-success" style="display:none; text-align:center; padding:1.5rem 0; color:var(--rose); font-weight:700; font-size:.95rem;">
+          ✅ Message sent! I'll be in touch soon.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="footer-content">
+    <a href="#hero" class="footer-logo">Scholastica <span>Wanja</span></a>
+    <div class="footer-links">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Work</a>
+      <a href="#contact">Contact</a>
+      <a href="https://www.linkedin.com/in/scholastica-wanja-b6216b339" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <p class="footer-copy">© 2025 Scholastica Wanja · Executive Virtual Assistant</p>
+  </div>
+</footer>
+
+<!-- ═══════════ SCRIPTS ═══════════ -->
+<script>
+  // Scroll progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progress-bar').style.width = scrolled + '%';
+  });
+
+  // Intersection observer for fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a:not(.nav-cta)');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobile-nav').classList.remove('open');
+  }
+
+  // Form
+  function handleForm(e) {
+    e.preventDefault();
+    e.target.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    setTimeout(() => {
+      e.target.style.display = 'flex';
+      document.getElementById('form-success').style.display = 'none';
+      e.target.reset();
+    }, 4000);
+  }
+</script>
+</body>
+</html>
